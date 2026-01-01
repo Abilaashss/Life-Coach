@@ -1,0 +1,467 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+/* 
+  Tailwind v4 handles base styles automatically with @import "tailwindcss".
+  We can add custom base styles here.
+*/
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+/* Default Light (Fallback) */
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(222.2 84% 4.9%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(222.2 84% 4.9%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(222.2 84% 4.9%);
+  --primary: hsl(221.2 83.2% 53.3%);
+  --primary-foreground: hsl(210 40% 98%);
+  --secondary: hsl(210 40% 96.1%);
+  --secondary-foreground: hsl(222.2 47.4% 11.2%);
+  --muted: hsl(210 40% 96.1%);
+  --muted-foreground: hsl(215.4 16.3% 46.9%);
+  --accent: hsl(210 40% 96.1%);
+  --accent-foreground: hsl(222.2 47.4% 11.2%);
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --border: hsl(214.3 31.8% 91.4%);
+  --input: hsl(214.3 31.8% 91.4%);
+  --ring: hsl(221.2 83.2% 53.3%);
+  --radius: 0.5rem;
+}
+
+/* Explicit Light Theme */
+[data-theme="light"] {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(222.2 84% 4.9%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(222.2 84% 4.9%);
+  --primary: hsl(221.2 83.2% 53.3%);
+  --primary-foreground: hsl(210 40% 98%);
+  --secondary: hsl(210 40% 96.1%);
+  --secondary-foreground: hsl(222.2 47.4% 11.2%);
+  --muted: hsl(210 40% 96.1%);
+  --muted-foreground: hsl(215.4 16.3% 46.9%);
+  --accent: hsl(210 40% 96.1%);
+  --accent-foreground: hsl(222.2 47.4% 11.2%);
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --border: hsl(214.3 31.8% 91.4%);
+  --input: hsl(214.3 31.8% 91.4%);
+  --ring: hsl(221.2 83.2% 53.3%);
+}
+
+/* Default Dark (and explicit Dark Theme) */
+[data-theme="dark"],
+.dark {
+  --background: hsl(222.2 84% 4.9%);
+  --foreground: hsl(210 40% 98%);
+  --card: hsl(222.2 84% 4.9%);
+  --card-foreground: hsl(210 40% 98%);
+  --popover: hsl(222.2 84% 4.9%);
+  --popover-foreground: hsl(210 40% 98%);
+  --primary: hsl(217.2 91.2% 59.8%);
+  --primary-foreground: hsl(222.2 47.4% 11.2%);
+  --secondary: hsl(217.2 32.6% 17.5%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --muted: hsl(217.2 32.6% 17.5%);
+  --muted-foreground: hsl(215 20.2% 65.1%);
+  --accent: hsl(217.2 32.6% 17.5%);
+  --accent-foreground: hsl(210 40% 98%);
+  --destructive: hsl(0 62.8% 30.6%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --border: hsl(217.2 32.6% 17.5%);
+  --input: hsl(217.2 32.6% 17.5%);
+  --ring: hsl(212.7 26.8% 83.9%);
+}
+
+/* --- Premium Themes --- */
+
+/* Batman */
+[data-theme="batman"] {
+  --background: hsl(0 0% 5%);
+  --foreground: hsl(0 0% 90%);
+  --card: hsl(0 0% 8%);
+  --card-foreground: hsl(0 0% 90%);
+  --primary: hsl(50 100% 50%);
+  /* Yellow */
+  --primary-foreground: hsl(0 0% 0%);
+  --secondary: hsl(0 0% 15%);
+  --secondary-foreground: hsl(0 0% 90%);
+  --muted: hsl(0 0% 15%);
+  --muted-foreground: hsl(0 0% 60%);
+  --accent: hsl(0 0% 15%);
+  --accent-foreground: hsl(50 100% 50%);
+  --border: hsl(0 0% 20%);
+  --input: hsl(0 0% 20%);
+  --ring: hsl(50 100% 50%);
+}
+
+/* Catppuccin Mocha */
+[data-theme="catppuccin-mocha"] {
+  --background: hsl(240 21% 12%);
+  /* Base */
+  --foreground: hsl(226 64% 88%);
+  /* Text */
+  --card: hsl(240 21% 15%);
+  /* Mantle */
+  --card-foreground: hsl(226 64% 88%);
+  --primary: hsl(267 84% 81%);
+  /* Mauve */
+  --primary-foreground: hsl(240 21% 12%);
+  --secondary: hsl(240 21% 19%);
+  /* Surface0 */
+  --secondary-foreground: hsl(226 64% 88%);
+  --muted: hsl(240 21% 19%);
+  --muted-foreground: hsl(240 7% 63%);
+  /* Subtext0 */
+  --accent: hsl(240 21% 19%);
+  --accent-foreground: hsl(267 84% 81%);
+  --border: hsl(240 21% 25%);
+  /* Surface1 */
+  --input: hsl(240 21% 25%);
+  --ring: hsl(267 84% 81%);
+}
+
+/* Catppuccin Latte */
+[data-theme="catppuccin-latte"] {
+  --background: hsl(220 23% 95%);
+  /* Base */
+  --foreground: hsl(240 21% 33%);
+  /* Text */
+  --card: hsl(0 0% 100%);
+  /* Base/White */
+  --card-foreground: hsl(240 21% 33%);
+  --primary: hsl(267 84% 60%);
+  /* Mauve darker */
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(220 23% 90%);
+  /* Surface0 */
+  --secondary-foreground: hsl(240 21% 33%);
+  --muted: hsl(220 23% 90%);
+  --muted-foreground: hsl(240 7% 50%);
+  --accent: hsl(220 23% 90%);
+  --accent-foreground: hsl(267 84% 60%);
+  --border: hsl(220 23% 85%);
+  --input: hsl(220 23% 85%);
+  --ring: hsl(267 84% 60%);
+}
+
+/* GitHub Dark */
+[data-theme="github-dark"] {
+  --background: hsl(210 20% 6%);
+  /* #0d1117 */
+  --foreground: hsl(210 17% 82%);
+  /* #c9d1d9 */
+  --card: hsl(210 22% 10%);
+  /* #161b22 */
+  --card-foreground: hsl(210 17% 82%);
+  --primary: hsl(212 92% 45%);
+  /* #1f6feb */
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(210 22% 15%);
+  --secondary-foreground: hsl(210 17% 82%);
+  --muted: hsl(210 22% 15%);
+  --muted-foreground: hsl(212 12% 50%);
+  --accent: hsl(210 22% 15%);
+  --accent-foreground: hsl(212 92% 45%);
+  --border: hsl(210 18% 18%);
+  /* #30363d */
+  --input: hsl(210 18% 18%);
+  --ring: hsl(212 92% 45%);
+}
+
+/* Gold */
+[data-theme="gold"] {
+  --background: hsl(0 0% 5%);
+  --foreground: hsl(45 90% 80%);
+  --card: hsl(0 0% 8%);
+  --card-foreground: hsl(45 90% 80%);
+  --primary: hsl(45 100% 50%);
+  --primary-foreground: hsl(0 0% 0%);
+  --secondary: hsl(0 0% 12%);
+  --secondary-foreground: hsl(45 90% 80%);
+  --muted: hsl(0 0% 12%);
+  --muted-foreground: hsl(45 30% 50%);
+  --accent: hsl(0 0% 12%);
+  --accent-foreground: hsl(45 100% 50%);
+  --border: hsl(45 50% 20%);
+  --input: hsl(45 50% 20%);
+  --ring: hsl(45 100% 50%);
+}
+
+/* Terminal */
+[data-theme="terminal"] {
+  --background: hsl(120 10% 5%);
+  --foreground: hsl(120 100% 50%);
+  --card: hsl(120 10% 8%);
+  --card-foreground: hsl(120 100% 50%);
+  --primary: hsl(120 100% 50%);
+  --primary-foreground: hsl(0 0% 0%);
+  --secondary: hsl(120 20% 10%);
+  --secondary-foreground: hsl(120 100% 50%);
+  --muted: hsl(120 20% 10%);
+  --muted-foreground: hsl(120 50% 30%);
+  --accent: hsl(120 20% 10%);
+  --accent-foreground: hsl(120 100% 50%);
+  --border: hsl(120 100% 20%);
+  --input: hsl(120 100% 20%);
+  --ring: hsl(120 100% 50%);
+}
+
+/* Iron Man */
+[data-theme="iron-man"] {
+  --background: hsl(0 50% 10%);
+  /* Dark Red */
+  --foreground: hsl(45 100% 80%);
+  /* Gold Text */
+  --card: hsl(0 50% 15%);
+  --card-foreground: hsl(45 100% 80%);
+  --primary: hsl(45 100% 50%);
+  /* Gold */
+  --primary-foreground: hsl(0 50% 20%);
+  --secondary: hsl(0 40% 20%);
+  --secondary-foreground: hsl(45 100% 80%);
+  --muted: hsl(0 40% 20%);
+  --muted-foreground: hsl(0 30% 60%);
+  --accent: hsl(0 40% 20%);
+  --accent-foreground: hsl(45 100% 50%);
+  --border: hsl(45 50% 30%);
+  --input: hsl(45 50% 30%);
+  --ring: hsl(45 100% 50%);
+}
+
+/* Carbon Dark */
+[data-theme="carbon-dark"] {
+  --background: hsl(0 0% 10%);
+  --foreground: hsl(0 0% 90%);
+  --card: hsl(0 0% 15%);
+  --card-foreground: hsl(0 0% 90%);
+  --primary: hsl(210 100% 50%);
+  /* Blue */
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(0 0% 20%);
+  --secondary-foreground: hsl(0 0% 90%);
+  --muted: hsl(0 0% 20%);
+  --muted-foreground: hsl(0 0% 60%);
+  --accent: hsl(0 0% 20%);
+  --accent-foreground: hsl(210 100% 50%);
+  --border: hsl(0 0% 25%);
+  --input: hsl(0 0% 25%);
+  --ring: hsl(210 100% 50%);
+}
+
+/* Carbon Light */
+[data-theme="carbon-light"] {
+  --background: hsl(0 0% 95%);
+  --foreground: hsl(0 0% 10%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(0 0% 10%);
+  --primary: hsl(210 100% 50%);
+  /* Blue */
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(0 0% 90%);
+  --secondary-foreground: hsl(0 0% 10%);
+  --muted: hsl(0 0% 90%);
+  --muted-foreground: hsl(0 0% 50%);
+  --accent: hsl(0 0% 90%);
+  --accent-foreground: hsl(210 100% 50%);
+  --border: hsl(0 0% 85%);
+  --input: hsl(0 0% 85%);
+  --ring: hsl(210 100% 50%);
+}
+
+/* Kim Dokja (ORV) */
+[data-theme="kim-dokja"] {
+  --background: hsl(220 20% 10%);
+  /* Dark Navy */
+  --foreground: hsl(0 0% 95%);
+  /* White */
+  --card: hsl(220 20% 15%);
+  --card-foreground: hsl(0 0% 95%);
+  --primary: hsl(0 0% 100%);
+  /* White Star */
+  --primary-foreground: hsl(220 20% 10%);
+  --secondary: hsl(220 20% 20%);
+  --secondary-foreground: hsl(0 0% 95%);
+  --muted: hsl(220 20% 20%);
+  --muted-foreground: hsl(220 10% 60%);
+  --accent: hsl(220 20% 20%);
+  --accent-foreground: hsl(0 0% 100%);
+  --border: hsl(220 20% 30%);
+  --input: hsl(220 20% 30%);
+  --ring: hsl(0 0% 100%);
+}
+
+/* Kim Dokja's Mother (Inferred - Dark/Red/Brown) */
+[data-theme="kim-dokja-mother"] {
+  --background: hsl(0 20% 10%);
+  --foreground: hsl(0 10% 90%);
+  --card: hsl(0 20% 15%);
+  --card-foreground: hsl(0 10% 90%);
+  --primary: hsl(0 60% 40%);
+  /* Dark Red */
+  --primary-foreground: hsl(0 0% 95%);
+  --secondary: hsl(0 20% 20%);
+  --secondary-foreground: hsl(0 10% 90%);
+  --muted: hsl(0 20% 20%);
+  --muted-foreground: hsl(0 10% 60%);
+  --accent: hsl(0 20% 20%);
+  --accent-foreground: hsl(0 60% 40%);
+  --border: hsl(0 20% 30%);
+  --input: hsl(0 20% 30%);
+  --ring: hsl(0 60% 40%);
+}
+
+/* Yoo Joonghyuk (ORV - Black/Gold/Blue) */
+[data-theme="yoo-joonghyuk"] {
+  --background: hsl(0 0% 0%);
+  /* Pure Black */
+  --foreground: hsl(0 0% 90%);
+  --card: hsl(0 0% 10%);
+  --card-foreground: hsl(0 0% 90%);
+  --primary: hsl(210 80% 60%);
+  /* Blue */
+  --primary-foreground: hsl(0 0% 0%);
+  --secondary: hsl(0 0% 15%);
+  --secondary-foreground: hsl(0 0% 90%);
+  --muted: hsl(0 0% 15%);
+  --muted-foreground: hsl(0 0% 50%);
+  --accent: hsl(0 0% 15%);
+  --accent-foreground: hsl(210 80% 60%);
+  --border: hsl(0 0% 25%);
+  --input: hsl(0 0% 25%);
+  --ring: hsl(210 80% 60%);
+}
+
+/* Lee Jihye (ORV - Navy/Grey) */
+[data-theme="lee-jihye"] {
+  --background: hsl(210 30% 15%);
+  --foreground: hsl(0 0% 90%);
+  --card: hsl(210 30% 20%);
+  --card-foreground: hsl(0 0% 90%);
+  --primary: hsl(0 0% 80%);
+  /* Silver */
+  --primary-foreground: hsl(210 30% 15%);
+  --secondary: hsl(210 30% 25%);
+  --secondary-foreground: hsl(0 0% 90%);
+  --muted: hsl(210 30% 25%);
+  --muted-foreground: hsl(210 10% 60%);
+  --accent: hsl(210 30% 25%);
+  --accent-foreground: hsl(0 0% 80%);
+  --border: hsl(210 30% 35%);
+  --input: hsl(210 30% 35%);
+  --ring: hsl(0 0% 80%);
+}
+
+/* Jung Heewon (ORV - Fire/Red) */
+[data-theme="jung-heewon"] {
+  --background: hsl(10 30% 10%);
+  --foreground: hsl(0 0% 95%);
+  --card: hsl(10 30% 15%);
+  --card-foreground: hsl(0 0% 95%);
+  --primary: hsl(10 90% 60%);
+  /* Fire Red */
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(10 30% 20%);
+  --secondary-foreground: hsl(0 0% 95%);
+  --muted: hsl(10 30% 20%);
+  --muted-foreground: hsl(10 10% 60%);
+  --accent: hsl(10 30% 20%);
+  --accent-foreground: hsl(10 90% 60%);
+  --border: hsl(10 30% 30%);
+  --input: hsl(10 30% 30%);
+  --ring: hsl(10 90% 60%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Tiptap Specific Styles */
+.ProseMirror ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 1.5em;
+}
+
+.ProseMirror h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.ProseMirror h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.ProseMirror mark {
+  background-color: #ffe066;
+  padding: 0.1em 0.3em;
+  border-radius: 0.2em;
+}
+
+.ProseMirror p {
+  margin-bottom: 0.5em;
+}
