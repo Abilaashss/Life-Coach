@@ -1,36 +1,436 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌟 Life Coach - AI-Powered Productivity & Wellness System
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-16.0-black?style=for-the-badge&logo=next.js)
+![React](https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript)
+![TailwindCSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
+![Google AI](https://img.shields.io/badge/Google_AI-Gemini-4285F4?style=for-the-badge&logo=google)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+**Elevate Your Life with AI-Powered Productivity**
+
+[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Tech Stack](#-tech-stack) • [Configuration](#-configuration)
+
+</div>
+
+---
+
+## 📖 Overview
+
+**Life Coach** is a comprehensive, AI-powered personal productivity and wellness system built with Next.js 16 and Google's Gemini AI. It combines intelligent task management, adaptive coaching, focus enhancement, and mindful journaling into one seamless experience.
+
+### 🎯 What Makes It Special?
+
+- **AI Life Coach**: Personalized guidance with multiple coaching styles (Supportive, Tough Love, Analytical, Humorous, Zen)
+- **Smart Task Management**: AI-powered task prioritization with natural language commands
+- **AI-Enhanced Pomodoro**: Focus timer with facial recognition and screen activity monitoring
+- **Intelligent Journal**: Rich text editor with AI-powered daily reflections
+- **Mood Tracking**: Emotional wellness insights integrated across all features
+- **Context-Aware**: All features work together, sharing context for a unified experience
+
+---
+
+## ✨ Features
+
+### 🤖 AI Life Coach
+- **Multiple Coaching Personalities**: Choose from 5 distinct coaching styles
+- **Context-Aware Conversations**: AI knows your tasks, mood, and daily progress
+- **Voice & Text Input**: Natural conversation with voice note support
+- **Smart Actions**: AI can create tasks, set timers, and update your journal directly
+- **Chat History**: Organized sessions with searchable conversation history
+- **File Attachments**: Share images and documents for richer context
+
+### ✅ Smart To-Do List
+- **Priority Management**: High, Medium, Low priority levels with visual indicators
+- **Due Dates & Times**: Schedule tasks with date and time reminders
+- **AI Integration**: Create and complete tasks through natural language with your AI coach
+- **Task Categories**: Separate active and completed task views
+- **Drag & Drop**: (Future enhancement ready)
+- **URL-based Editing**: Deep link support for quick task editing
+
+### ⏱️ AI-Powered Pomodoro Timer
+- **Customizable Intervals**: Adjust work and break durations to your preference
+- **Cycle Tracking**: Monitor your productivity streaks
+- **Facial Recognition**: AI detects when you're away from your desk using BlazeFace ML model
+- **Screen Activity Monitoring**: AI Guardian analyzes your screen to detect distractions
+- **Distraction Alerts**: Real-time warnings when you're not focused on your task
+- **Visual Feedback**: Beautiful progress indicators and session stats
+
+### 📔 Daily Journal
+- **Rich Text Editor**: Powered by TiptapEditor with full formatting support
+- **Slash Commands**: Quick access to formatting options (headings, lists, code blocks, etc.)
+- **Bubble Menu**: Context-aware formatting toolbar
+- **Custom Styling**: Text colors, highlights, and styles
+- **Media Support**: Embed images and YouTube videos
+- **AI Integration**: Coach can automatically append reflections to your journal
+- **Cover Images & Icons**: Personalize each journal entry
+- **Auto-save**: Never lose your thoughts
+
+### 🎨 Customization
+- **20+ Color Themes**: From minimal to vibrant (Catppuccin, Tokyo Night, Dracula, Nord, Solarized, GitHub, Monokai, Synthwave, Cyberpunk, Lo-Fi, Carbon)
+- **Responsive Design**: Beautiful on desktop, tablet, and mobile
+- **Dark/Light Mode**: System-aware with manual override
+- **Smooth Animations**: Framer Motion for delightful interactions
+
+### 📊 Profile & Stats
+- **Personal Profile**: Set your name, bio, and preferences
+- **Coaching Style Selection**: Customize AI behavior to match your needs
+- **Theme Preferences**: Choose your perfect aesthetic
+- **Progress Tracking**: (Future: Mood trends, task completion rates, focus time analytics)
+
+---
+
+## 🚀 Installation
+
+### Prerequisites
+
+- **Node.js** 18.0 or higher
+- **npm**, **yarn**, **pnpm**, or **bun**
+- **Google Gemini API Key** (required for AI features)
+
+### Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Abilaashss/Life-Coach.git
+   cd life-coach
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
+
+3. **Set up environment variables**
+   
+   Create a `.env.local` file in the root directory:
+   ```env
+   NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key_here
+   ```
+
+   **Get your Gemini API key:**
+   - Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Sign in with your Google account
+   - Create a new API key
+   - Copy and paste it into your `.env.local` file
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open your browser**
+   
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🎮 Usage
+
+### First Time Setup
+
+1. **Configure Your Profile**
+   - Navigate to Settings (`/settings`)
+   - Enter your name and bio
+   - Select your preferred coaching style
+   - Choose your color theme
+
+2. **Start with Your AI Coach**
+   - Go to the Coach tab (`/coach`)
+   - Tell the AI about your goals and what you want to achieve
+   - The AI will help you create tasks and plan your day
+
+3. **Create Your First Tasks**
+   - Either use the To-Do tab (`/todo`) directly
+   - Or ask your AI coach to create tasks for you
+   - Set priorities and due dates
+
+4. **Start a Focus Session**
+   - Go to the Pomodoro tab (`/pomodoro`)
+   - Set your work duration (default 25 minutes)
+   - Enable AI monitoring for distraction detection
+   - Click Start and focus on your work
+
+5. **Reflect in Your Journal**
+   - Open the Journal tab (`/journal`)
+   - Write about your day
+   - Use `/` for quick formatting commands
+   - Let the AI help capture your thoughts automatically
+
+### AI Coach Commands
+
+Your AI coach can perform actions through natural language. Here are some examples:
+
+**Task Management:**
+- "Add a task to finish the project report with high priority"
+- "Mark task XYZ as complete"
+- "Show me my incomplete tasks"
+
+**Timer Control:**
+- "Set a 25-minute focus timer"
+- "Let's do a quick 15-minute work session"
+
+**Journal Updates:**
+- "I had a great workout today" → AI adds to your journal
+- "Completed three client calls this afternoon" → AI logs it
+
+### Keyboard Shortcuts (Journal)
+
+- `Ctrl/Cmd + Z` - Undo
+- `Ctrl/Cmd + Y` - Redo
+- `Ctrl/Cmd + B` - Bold
+- `Ctrl/Cmd + I` - Italic
+- `/` - Open command menu
+
+### AI Monitoring Features
+
+**Facial Recognition:**
+- Requires webcam permission
+- Detects when you're away from your desk
+- Automatically pauses timer if you're gone too long
+
+**Screen Activity Monitor (AI Guardian):**
+- Requires screen sharing permission
+- Analyzes what's on your screen
+- Detects if you're distracted (social media, videos, etc.)
+- Provides gentle reminders to stay focused
+
+---
+
+## 🛠️ Tech Stack
+
+### Core Framework
+- **Next.js 16** - React framework with App Router
+- **React 19.2** - UI library with Server Components
+- **TypeScript** - Type safety and better DX
+
+### AI & Machine Learning
+- **Google Generative AI** - Gemini 3 Pro for conversational AI
+- **TensorFlow.js** - Client-side ML runtime
+- **BlazeFace** - Facial detection model
+
+### UI & Styling
+- **Tailwind CSS 4** - Utility-first CSS framework
+- **Framer Motion** - Animation library
+- **Radix UI** - Accessible component primitives
+- **Lucide React** - Icon library
+- **class-variance-authority** - Component variant management
+
+### Rich Text Editing
+- **Tiptap** - Headless editor framework
+  - Bubble Menu
+  - Slash Commands
+  - Code Blocks
+  - Image & YouTube embeds
+  - Syntax highlighting
+
+### Additional Libraries
+- **React Webcam** - Camera access
+- **Recharts** - Data visualization
+- **Emoji Picker React** - Emoji selection
+- **Tippy.js** - Tooltips
+- **clsx & tailwind-merge** - Utility functions
+
+### Development Tools
+- **ESLint** - Code linting
+- **PostCSS** - CSS processing
+- **React Compiler** - Performance optimization
+
+---
+
+## ⚙️ Configuration
+
+### Environment Variables
+
+```env
+# Required
+NEXT_PUBLIC_GEMINI_API_KEY=your_api_key_here
+
+# Optional (if you add backend features)
+# DATABASE_URL=your_database_url
+# NEXTAUTH_SECRET=your_auth_secret
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Customizing Coaching Styles
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Edit `/src/lib/gemini.ts` to modify AI behavior:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```typescript
+// Adjust system prompts, tone, or add new coaching styles
+const systemPrompt = `...`
+```
 
-## Learn More
+### Adding New Themes
 
-To learn more about Next.js, take a look at the following resources:
+Edit `/src/app/globals.css` to add custom color themes:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```css
+[data-theme="your-theme"] {
+  --background: ...;
+  --foreground: ...;
+  /* Add your color variables */
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Adjusting Timer Defaults
 
-## Deploy on Vercel
+Modify initial state in `/src/context/AppContext.tsx`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```typescript
+const [workDuration, setWorkDuration] = useState(25); // Default work time
+const [breakDuration, setBreakDuration] = useState(5); // Default break time
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📂 Project Structure
+
+```
+life-coach/
+├── src/
+│   ├── app/                    # Next.js App Router pages
+│   │   ├── layout.tsx          # Root layout
+│   │   ├── page.tsx            # Home page
+│   │   ├── coach/              # AI Coach page
+│   │   ├── journal/            # Journal page
+│   │   ├── pomodoro/           # Pomodoro timer page
+│   │   ├── settings/           # Settings page
+│   │   └── todo/               # Task list page
+│   ├── components/             # React components
+│   │   ├── ChatSidebar.tsx     # Chat history sidebar
+│   │   ├── CoachChat.tsx       # Main AI chat interface
+│   │   ├── JournalEditor.tsx   # Rich text editor
+│   │   ├── JournalHeader.tsx   # Journal controls
+│   │   ├── MoodTracker.tsx     # Mood selection
+│   │   ├── Navigation.tsx      # Main nav bar
+│   │   ├── Pomodoro.tsx        # Timer component
+│   │   ├── ProfileStats.tsx    # User stats display
+│   │   ├── TaskBoard.tsx       # Task management UI
+│   │   ├── editor/             # Editor extensions
+│   │   │   ├── EditorBubbleMenu.tsx
+│   │   │   └── SlashCommand.tsx
+│   │   └── ui/                 # Reusable UI components
+│   │       ├── Button.tsx
+│   │       ├── Card.tsx
+│   │       └── Input.tsx
+│   ├── context/
+│   │   └── AppContext.tsx      # Global state management
+│   └── lib/
+│       ├── gemini.ts           # AI integration
+│       └── utils.ts            # Utility functions
+├── public/                     # Static assets
+├── .env.local                  # Environment variables (create this)
+├── next.config.ts              # Next.js configuration
+├── tailwind.config.js          # Tailwind configuration
+├── tsconfig.json               # TypeScript configuration
+└── package.json                # Dependencies
+```
+
+---
+
+## 🎨 Screenshots
+
+### Home Dashboard
+Beautiful landing page with feature cards and smooth animations.
+
+### AI Life Coach
+Conversational interface with context-aware responses and smart actions.
+
+### Smart To-Do List
+Priority-based task management with visual indicators and due dates.
+
+### Pomodoro Timer
+AI-enhanced focus sessions with presence detection.
+
+### Daily Journal
+Rich text editor with slash commands and formatting options.
+
+---
+
+## 🚧 Roadmap
+
+### Upcoming Features
+- [ ] **Data Persistence**: Backend integration with database
+- [ ] **User Authentication**: Multi-user support
+- [ ] **Analytics Dashboard**: Detailed productivity insights
+- [ ] **Habit Tracking**: Build and monitor daily habits
+- [ ] **Calendar Integration**: Sync with Google Calendar
+- [ ] **Mobile App**: React Native version
+- [ ] **Offline Mode**: PWA capabilities
+- [ ] **Export Features**: PDF/Markdown export for journal
+- [ ] **Team Features**: Collaborative tasks and shared goals
+- [ ] **Advanced AI**: Custom AI training on your data
+
+### Known Issues
+- Screen monitoring requires manual permission grant
+- Webcam detection may not work on all browsers
+- Local storage limitations (no cloud sync yet)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+1. **Fork the repository**
+2. **Create a feature branch** (`git checkout -b feature/AmazingFeature`)
+3. **Commit your changes** (`git commit -m 'Add some AmazingFeature'`)
+4. **Push to the branch** (`git push origin feature/AmazingFeature`)
+5. **Open a Pull Request**
+
+### Development Guidelines
+- Follow the existing code style
+- Write meaningful commit messages
+- Add comments for complex logic
+- Test your changes thoroughly
+- Update documentation as needed
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+## 🙏 Acknowledgments
+
+- **Google AI** - For the powerful Gemini API
+- **Vercel** - For Next.js and hosting platform
+- **TensorFlow Team** - For client-side ML capabilities
+- **Tiptap** - For the excellent editor framework
+- **Open Source Community** - For all the amazing libraries
+
+---
+
+## 📞 Support
+
+Having issues or questions?
+
+- 🐛 [Report a Bug](https://github.com/Abilaashss/Life-Coach/issues)
+- 💡 [Request a Feature](https://github.com/Abilaashss/Life-Coach/issues)
+- 📧 Contact: [Your Email]
+- 🌐 Website: [Your Website]
+
+---
+
+## 🌟 Star History
+
+If you find this project useful, please consider giving it a star! ⭐
+
+---
+
+<div align="center">
+
+**Built with ❤️ by [Abilaashss](https://github.com/Abilaashss)**
+
+**Made possible by AI, designed for humans.**
+
+[⬆ Back to Top](#-life-coach---ai-powered-productivity--wellness-system)
+
+</div>
