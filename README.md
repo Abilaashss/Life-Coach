@@ -288,6 +288,117 @@ const [breakDuration, setBreakDuration] = useState(5); // Default break time
 
 ---
 
+## 🧠 AI Agent Implementation (architecture & concrete details)
+
+This section explains how the AI agent is implemented in the codebase, where the important files live, the message & action contract it uses, and how to test and extend it safely.
+
+### High-level architecture
+- The AI agent is a thin orchestration layer that calls Google Gemini for conversational understanding and generation. It runs from the browser (client) and/or server components depending on the feature (chat UI is client-side; heavy orchestration or secrets should run on server-side API routes).
+- Key integration file: `src/lib/gemini.ts` — this module contains request builders, system prompts, retry logic, and lightweight caching for Gemini calls.
+- Agent responsibilities:
+   - Interpret user input (intent + entities)
+   - Decide if a direct reply or a 'tool/action' is required (create task, set timer, append journal, query state)
+   - Execute actions through local functions (no external network calls except Gemini and optional backend)
+   - Maintain short-term conversational context (chat history + relevant app state snapshot)
+
+### System prompts & personalities
+- We implement 5 coaching personalities by varying the system prompt in `src/lib/gemini.ts`.
+- Example prompts live as constants in `gemini.ts`. Each prompt includes:
+   - role: system
+   - persona description (tone, boundaries)
+   - available tools/actions and their JSON schema
+   - explicit safety constraints (privacy, no PII exfiltration, no medical/legal advice)
+
+Sample system prompt (conceptual):
+
+```text
+You are Life Coach, a concise and supportive assistant. You have access to actions: create_task, update_task, set_timer, append_journal. When you want to perform an action, reply with a JSON block exactly matching the action schema. Otherwise reply conversationally. Tone: SUPPORTIVE | TOUGH_LOVE | ANALYTICAL | HUMOROUS | ZEN depending on user preference.
+```
+
+### Action / Tool contract (JSON shapes)
+The agent uses structured JSON to declare actions. `src/lib/gemini.ts` validates these before executing local handlers.
+
+Common actions (examples):
+
+- create_task
+   - payload: { "title": string, "notes"?: string, "priority"?: "high"|"medium"|"low", "dueDate"?: ISOString }
+- update_task
+   - payload: { "id": string, "fields": { ... } }
+- set_timer
+   - payload: { "minutes": number, "label"?: string, "autoPauseOnAway"?: boolean }
+- append_journal
+   - payload: { "entryId"?: string, "content": string, "tags"?: string[] }
+
+Agent responses follow this pattern:
+- If actionable: send JSON with `action` and `payload` fields in a fenced block so the UI can parse reliably.
+- If conversational: plain text reply.
+
+### Where to look in code
+- `src/lib/gemini.ts`
+   - build request payloads for Gemini, swap system prompt for chosen personality
+   - parse model responses and extract action JSON using a small deterministic parser
+   - retry & backoff for transient errors (exponential backoff up to 3 attempts)
+- `src/components/CoachChat.tsx`
+   - UI for chat messages, voice input, and action dispatching
+   - renders model replies and intercepts JSON action blocks to call local handlers
+- `src/context/AppContext.tsx`
+   - central store for tasks, timers, journal entries, and short-term chat context
+   - exposes functions: createTask, updateTask, startTimer, appendJournal (these are called by the chat layer)
+
+### Execution flow (example: user asks to "Create a task")
+1. User types: "Create a task to finish slides by Friday with high priority"
+2. `CoachChat` forwards text to `gemini.ts` with the current persona and relevant context (user tasks summary, today stats)
+3. Gemini returns either a plain reply or an action JSON like:
+    ```json
+    {
+       "action":"create_task",
+       "payload":{
+          "title":"Finish slides",
+          "priority":"high",
+          "dueDate":"2026-01-08T17:00:00.000Z",
+          "notes":"Include final case study slide"
+       }
+    }
+    ```
+4. `CoachChat` detects action JSON, validates it against the local schema, then calls `createTask()` from `AppContext`.
+5. Task is added to local state (and optionally POSTed to a backend). The chat shows a confirmation message.
+
+### Error handling, retries & rate limits
+- `gemini.ts` should:
+   - Surface readable errors to the UI (network, auth, rate limits)
+   - Use exponential backoff on 5xx/ratelimit responses (max 3 attempts)
+   - Fall back to a simpler, local/NLU-based parser if Gemini fails repeatedly: e.g., use regex-based slot extraction for common commands
+
+### Security & privacy notes
+- Never send raw private data or attachments to Gemini unless explicitly opted-in by user and documented in app settings.
+- Keep the Gemini API key server-side where possible; prefer server-side API routes that proxy requests so `NEXT_PUBLIC_*` keys are not exposed. If the key must be used in the client for experiments, store only `NEXT_PUBLIC_GEMINI_API_KEY` and rotate it frequently.
+- Remove or redact PII from context before sending it to the model. `src/lib/gemini.ts` contains a small sanitizer hook to remove email addresses and long text blobs unless the user confirms.
+
+### Local testing & mocking
+- Create a local mock adapter for Gemini responses to run offline and for unit tests. Put mock behaviors under `__mocks__/gemini.mock.ts` or similar.
+- Example test pattern:
+   1. Mock Gemini to return an action JSON for a create_task example
+   2. Render `CoachChat` and type the command
+   3. Assert `AppContext` has a new task and that the UI shows confirmation
+
+### Extending coaching styles
+- Add a new persona constant to `src/lib/gemini.ts` with a descriptive system prompt. Keep the available action schemas unchanged unless you add handlers in `AppContext`.
+
+### Telemetry & logs
+- Log only event metadata (action type, timestamp, outcome) to local storage or a server store if enabled. Avoid logging PII. Provide an opt-out switch in Settings.
+
+### Helpful development tips
+- When iterating prompts, keep a separate `devSystemPrompt` constant and load it only in non-production builds to experiment faster.
+- Keep the action JSON small and use ISO strings for dates to avoid timezone bugs.
+
+### Example developer checklist for adding a new agent-driven feature
+1. Add a new action schema in `src/lib/gemini.ts`.
+2. Add a handler function in `src/context/AppContext.tsx` that implements the action locally.
+3. Update `CoachChat` to recognize and route the action to the new handler.
+4. Write unit tests: mocked Gemini response → UI interaction → state change assertion.
+
+---
+
 ## 📂 Project Structure
 
 ```
